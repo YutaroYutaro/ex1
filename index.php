@@ -5,7 +5,10 @@
  * Date: 2018-12-10
  * Time: 14:54
  */
+include __DIR__ . '/app/php/Crud.php';
 
+$mysql = new Crud();
+$contents = $mysql->Read();
 ?>
 <!doctype html>
 <html lang="en">
@@ -37,12 +40,13 @@
 
         <!--    投稿一覧    -->
         <div class="col-8">
+            <?php foreach ($contents as $content) : ?>
             <div class="card mb-3">
-                <div id="1" class="card-body">
-                    <h5 class="card-title">タイトル</h5>
-                    <p class="card-text card-comment">投稿コメント</p>
+                <div id="<?php echo $content['id']; ?>" class="card-body">
+                    <h5 class="card-title"><?php echo $content['title']; ?></h5>
+                    <p class="card-text card-comment"><?php echo $content['comment']; ?></p>
                     <p class="card-text">
-                        <small class="text-muted">2018/12/10</small>
+                        <small class="text-muted"><?php echo $content['created_at']; ?></small>
                     </p>
                     <button type="button" class="btn btn-success updateButton" data-toggle="modal"
                             data-target="#updateModal">修正する
@@ -52,6 +56,7 @@
                     </button>
                 </div>
             </div>
+            <?php endforeach; ?>
         </div>
 
         <!-- Update Modal -->
