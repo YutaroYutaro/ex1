@@ -23,8 +23,9 @@
 <body>
 <div class="container mt-4">
     <div class="row">
+
+        <!--    入力フォーム    -->
         <div class="col-4">
-            <!-- フォームの表示 -->
             <form action="" method="post">
                 <label>タイトル</label>
                 <input type="text" class="form-control" id="title" name="title">
@@ -33,6 +34,8 @@
                 <button type="submit" class="btn btn-info">投稿する</button>
             </form>
         </div>
+
+        <!--    投稿一覧    -->
         <div class="col-8">
             <div class="card mb-3">
                 <div id="1" class="card-body">
@@ -51,7 +54,7 @@
             </div>
         </div>
 
-        <!-- Modal -->
+        <!-- Update Modal -->
         <div class="modal fade" id="updateModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
              aria-hidden="true">
             <div class="modal-dialog" role="document">
@@ -79,7 +82,7 @@
             </div>
         </div>
 
-        <!-- Modal -->
+        <!-- Delete Modal -->
         <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
              aria-hidden="true">
             <div class="modal-dialog" role="document">
