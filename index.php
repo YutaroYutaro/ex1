@@ -29,12 +29,12 @@ $contents = $mysql->Read();
 
         <!--    入力フォーム    -->
         <div class="col-4">
-            <form action="" method="post">
+            <form id="createForm" action="#" method="post">
                 <label>タイトル</label>
-                <input type="text" class="form-control" id="title" name="title">
+                <input type="text" class="form-control" id="title" name="title" placeholder="タイトル">
                 <label>内容</label>
                 <textarea class="form-control" id="comment" name="comment" placeholder="内容"></textarea>
-                <button type="submit" class="btn btn-info">投稿する</button>
+                <button id="createButton" type="button" class="btn btn-info">投稿する</button>
             </form>
         </div>
 

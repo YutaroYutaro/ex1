@@ -17,7 +17,29 @@ class Crud extends MySql
 
     public function Create($title, $comment)
     {
+        $res = 0;
+        $error = 'create query fail...';
 
+        try {
+            $sql = 'INSERT INTO `bbs` (`title`, `comment`, `created_at`) VALUES (?, ?, ?)';
+
+            $now = new DateTime('now');
+
+            $createdAt = $now->format('Y-m-d H:i:s');
+
+            $data = [$title, $comment, $createdAt];
+
+            $stmt = $this->dbh->prepare($sql);
+
+            $stmt->execute($data);
+
+            $res = $stmt->rowCount();
+
+        } catch (PDOException $e) {
+            $error = $e->getMessage();
+        }
+
+        return empty($res) ? $error : $res;
     }
 
     public function Read()
@@ -44,6 +66,9 @@ class Crud extends MySql
 
     public function Delete($id)
     {
+        $res = 0;
+        $error = 'delete query fail...';
+
         try {
             $sql = 'DELETE FROM `bbs` WHERE `id` = :id';
 
