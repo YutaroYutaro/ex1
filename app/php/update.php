@@ -10,6 +10,8 @@ include __DIR__ . '/Class/Crud.php';
 
 header('Content-type: text/plain; charset= UTF-8');
 
+$response = [];
+
 if (isset($_POST['id']) && isset($_POST['title']) && isset($_POST['comment'])) {
     $errors = [];
     $crud = new Crud();
@@ -22,7 +24,9 @@ if (isset($_POST['id']) && isset($_POST['title']) && isset($_POST['comment'])) {
 
     $response = ['err' => $errors, 'data' => $data];
 
-    echo json_encode($response);
 } else {
-    echo "Fail to ajax request";
+    $response = ['err' => ['要素が足りません．'], 'data' => []];
+
 }
+
+echo json_encode($response);
