@@ -44,7 +44,7 @@ class Crud extends MySql
 
     public function Read()
     {
-        $sql = 'SELECT * FROM `bbs`';
+        $sql = 'SELECT * FROM `bbs` ORDER BY `id` DESC';
 
         $stmt = $this->dbh->prepare($sql);
 
