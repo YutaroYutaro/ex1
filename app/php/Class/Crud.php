@@ -45,15 +45,15 @@ class Crud extends MySql
     public function Delete($id)
     {
         try {
-        $sql = 'DELETE FROM `bbs` WHERE `id` = :id';
+            $sql = 'DELETE FROM `bbs` WHERE `id` = :id';
 
-        $stmt = $this->dbh->prepare($sql);
+            $stmt = $this->dbh->prepare($sql);
 
-        $stmt->bindValue(':id', $id, PDO::PARAM_INT);
+            $stmt->bindValue(':id', $id, PDO::PARAM_INT);
 
-        $stmt->execute();
+            $stmt->execute();
 
-        $res = $stmt->rowCount();
+            $res = $stmt->rowCount();
 
         } catch (PDOException $e) {
             $error = $e->getMessage();
