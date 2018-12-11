@@ -61,7 +61,25 @@ class Crud extends MySql
 
     public function Update($id, $title, $comment)
     {
+        $res = 0;
+        $error = 'update query fail...';
 
+        try{
+            $sql = 'UPDATE `bbs` SET `title`=?, `comment`=? WHERE `id`=?';
+
+            $data = [$title, $comment, $id];
+
+            $stmt = $this->dbh->prepare($sql);
+
+            $stmt->execute($data);
+
+            $res = $stmt->rowCount();
+
+        } catch (PDOException $e) {
+            $error = $e->getMessage();
+        }
+
+        return empty($res) ? $error : $res;
     }
 
     public function Delete($id)

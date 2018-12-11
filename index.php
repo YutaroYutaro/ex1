@@ -39,7 +39,8 @@ $contents = $mysql->Read();
         </div>
 
         <!--    投稿一覧    -->
-        <div class="col-8">
+        <div id="bbs-index" class="col-8">
+            <div id="success-alert" class="alert alert-primary" role="alert" style="display: none;"></div>
             <?php foreach ($contents as $content) : ?>
             <div class="card mb-3">
                 <div id="<?php echo $content['id']; ?>" class="card-body">
@@ -71,11 +72,11 @@ $contents = $mysql->Read();
                         </button>
                     </div>
                     <div class="modal-body">
-                        <form action="" method="post">
+                        <form id="updateForm" action="" method="post">
                             <label>タイトル</label>
-                            <input type="text" class="form-control" id="update-title" name="update-title">
+                            <input type="text" class="form-control" id="update-title" name="title">
                             <label>内容</label>
-                            <textarea class="form-control" id="update-comment" name="update-comment"
+                            <textarea class="form-control" id="update-comment" name="comment"
                                       placeholder="内容"></textarea>
                         </form>
                     </div>
