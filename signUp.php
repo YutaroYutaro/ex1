@@ -27,20 +27,23 @@
         <h2>新規登録</h2>
     </div>
     <div class="card-body">
-        <form>
+        <form id="SignUpForm">
             <div class="form-group">
                 <label for="InputEmail">メールアドレス</label>
-                <input type="email" class="form-control" id="InputEmail" aria-describedby="emailHelp"
+                <input type="email" class="form-control" id="InputEmail" name="email" aria-describedby="emailHelp"
                        placeholder="メールアドレス">
             </div>
             <div class="form-group">
                 <label for="InputPassword">パスワード</label>
-                <input type="password" class="form-control" id="InputPassword" placeholder="パスワード">
+                <input type="password" class="form-control" id="InputPassword" name="password" placeholder="パスワード">
+            </div>
+            <div class="form-group">
+                <label for="InputName">表示名</label>
+                <input type="text" class="form-control" id="InputName" name="name" placeholder="表示名">
             </div>
 
-            <button type="submit" class="btn btn-primary">登録</button>
+            <button id="SignUp" type="button" class="btn btn-primary">登録</button>
         </form>
-
     </div>
 </div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
@@ -50,6 +53,7 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
         integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
         crossorigin="anonymous"></script>
+<script src="app/js/signUpFunction.js"></script>
 </body>
 </html>
 
