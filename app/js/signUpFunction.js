@@ -9,8 +9,8 @@ $('#SignUp').on('click', function () {
         contentType: false
     })
         .done((res) => {
-            // location.href = './index.php';
-            console.log(res);
+            location.href = './index.php';
+            // console.log(res);
         })
         .fail(() => {
             console.log('ajax fail...')
