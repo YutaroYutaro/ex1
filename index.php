@@ -5,9 +5,9 @@
  * Date: 2018-12-10
  * Time: 14:54
  */
-include __DIR__ . '/app/php/Class/Crud.php';
+include __DIR__ . '/app/php/Class/BbsModel.php';
 
-$mysql = new Crud();
+$mysql = new BbsModel();
 $contents = $mysql->Read();
 ?>
 <!doctype html>

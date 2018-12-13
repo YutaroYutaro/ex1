@@ -8,23 +8,23 @@
 
 include __DIR__ . '/MySql.php';
 
-class Crud extends MySql
+class BbsModel extends MySql
 {
     public function __construct()
     {
         parent::__construct();
     }
 
-    public function Create($title, $comment, $createdAt)
+    public function Create($userID, $title, $comment, $createdAt, $updatedAt)
     {
         $res = 0;
 
         $this->dbh->beginTransaction();
 
         try {
-            $sql = 'INSERT INTO `bbs` (`title`, `comment`, `created_at`) VALUES (?, ?, ?)';
+            $sql = 'INSERT INTO `bbs` (`user_id`, `title`, `comment`, `created_at`, `updated_at`) VALUES (?, ?, ?, ?, ?)';
 
-            $data = [$title, $comment, $createdAt];
+            $data = [$userID, $title, $comment, $createdAt, $updatedAt];
 
             $stmt = $this->dbh->prepare($sql);
 
@@ -49,7 +49,7 @@ class Crud extends MySql
         $this->dbh->beginTransaction();
 
         try {
-            $sql = 'SELECT * FROM `bbs` ORDER BY `id` DESC';
+            $sql = 'SELECT * FROM `bbs` WHERE `is_deleted`=false ORDER BY `id` DESC';
 
             $stmt = $this->dbh->prepare($sql);
 
@@ -69,16 +69,16 @@ class Crud extends MySql
         return $contents;
     }
 
-    public function Update($id, $title, $comment)
+    public function Update($id, $title, $comment, $updatedAt)
     {
         $res = 0;
 
         $this->dbh->beginTransaction();
 
         try{
-            $sql = 'UPDATE `bbs` SET `title`=?, `comment`=? WHERE `id`=?';
+            $sql = 'UPDATE `bbs` SET `title`=?, `comment`=?, `updated_at`=? WHERE `id`=? AND `is_deleted`=false';
 
-            $data = [$title, $comment, $id];
+            $data = [$title, $comment, $updatedAt, $id];
 
             $stmt = $this->dbh->prepare($sql);
 

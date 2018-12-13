@@ -6,7 +6,7 @@
  * Time: 14:32
  */
 
-include __DIR__ . '/Class/Crud.php';
+include __DIR__ . '/Class/BbsModel.php';
 include __DIR__ . '/Class/BbsValidation.php';
 
 header('Content-type: text/plain; charset= UTF-8');
@@ -28,13 +28,13 @@ if (isset($_POST['title']) && isset($_POST['comment'])) {
         $response = ['err' => $errors, 'data' => []];
 
     } else {
-        $crud = new Crud();
+        $crud = new BbsModel();
 
         $now = new DateTime('now');
 
         $createdAt = $now->format('Y-m-d H:i:s');
 
-        $id = $crud->create($_POST['title'], $_POST['comment'], $createdAt);
+        $id = $crud->create(1, $_POST['title'], $_POST['comment'], $createdAt, $createdAt);
 
         if ($id === 0) $errors['db_error'] = '新規作成に失敗しました．';
 

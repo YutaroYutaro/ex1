@@ -6,7 +6,7 @@
  * Time: 15:51
  */
 
-include __DIR__ . '/Class/Crud.php';
+include __DIR__ . '/Class/BbsModel.php';
 include __DIR__ . '/Class/BbsValidation.php';
 
 header('Content-type: text/plain; charset= UTF-8');
@@ -34,9 +34,13 @@ if (isset($_POST['id']) && isset($_POST['title']) && isset($_POST['comment'])) {
         $response = ['err' => $errors, 'data' => []];
 
     } else {
-        $crud = new Crud();
+        $now = new DateTime('now');
 
-        $result = $crud->update($_POST['id'], $_POST['title'], $_POST['comment']);
+        $updatedAt = $now->format('Y-m-d H:i:s');
+
+        $crud = new BbsModel();
+
+        $result = $crud->update($_POST['id'], $_POST['title'], $_POST['comment'], $updatedAt);
 
         $data = ['id' => $_POST['id'], 'title' => $_POST['title'], 'comment' => $_POST['comment']];
 

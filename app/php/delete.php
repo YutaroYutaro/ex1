@@ -6,7 +6,7 @@
  * Time: 10:30
  */
 
-include __DIR__ . '/Class/Crud.php';
+include __DIR__ . '/Class/BbsModel.php';
 
 header('Content-type: text/plain; charset= UTF-8');
 
@@ -15,7 +15,7 @@ $response = [];
 if (isset($_POST['id'])) {
     $errors = [];
 
-    $crud = new Crud();
+    $crud = new BbsModel();
 
     $result = $crud->delete($_POST['id']);
 
