@@ -21,7 +21,8 @@ class BbsValidation extends Validation
     {
         $errors = [];
 
-        if (!$this->MaxSize($title, 50)) $errors['title_length'] = 'タイトルは50文字以内で入力してください．';
+        if ($this->MaxSize($title, 50)) $errors['title_length'] = 'タイトルは50文字以内で入力してください．';
+        if ($this->Required($title)) $errors['title_required'] = 'タイトルを入力してください．';
 
         return $errors;
     }
@@ -30,7 +31,8 @@ class BbsValidation extends Validation
     {
         $errors = [];
 
-        if (!$this->MaxSize($comment, 100)) $errors['comment_length'] = 'コメントは100文字以内で入力してください．';
+        if ($this->MaxSize($comment, 100)) $errors['comment_length'] = 'コメントは100文字以内で入力してください．';
+        if ($this->Required($comment)) $errors['comment_required'] = 'コメントを入力してください．';
 
         return $errors;
     }
