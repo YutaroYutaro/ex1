@@ -42,23 +42,25 @@ $contents = $mysql->Read();
         <!--    投稿一覧    -->
         <div id="bbs-index" class="col-8">
             <div id="success-alert" class="alert alert-primary" role="alert" style="display: none;"></div>
-            <?php foreach ($contents as $content) : ?>
-            <div class="card mb-3">
-                <div id="<?php echo $content['id']; ?>" class="card-body">
-                    <h5 class="card-title"><?php echo $content['title']; ?></h5>
-                    <p class="card-text card-comment"><?php echo $content['comment']; ?></p>
-                    <p class="card-text">
-                        <small class="text-muted"><?php echo $content['created_at']; ?></small>
-                    </p>
-                    <button type="button" class="btn btn-success updateButton" data-toggle="modal"
-                            data-target="#updateModal">修正する
-                    </button>
-                    <button type="button" class="btn btn-danger deleteButton" data-toggle="modal"
-                            data-target="#deleteModal">削除する
-                    </button>
-                </div>
+            <div id="bbs-body">
+                <?php foreach ($contents as $content) : ?>
+                    <div class="card mb-3">
+                        <div id="<?php echo $content['id']; ?>" class="card-body">
+                            <h5 class="card-title"><?php echo $content['title']; ?></h5>
+                            <p class="card-text card-comment"><?php echo $content['comment']; ?></p>
+                            <p class="card-text">
+                                <small class="text-muted"><?php echo $content['created_at']; ?></small>
+                            </p>
+                            <button type="button" class="btn btn-success updateButton" data-toggle="modal"
+                                    data-target="#updateModal">修正する
+                            </button>
+                            <button type="button" class="btn btn-danger deleteButton" data-toggle="modal"
+                                    data-target="#deleteModal">削除する
+                            </button>
+                        </div>
+                    </div>
+                <?php endforeach; ?>
             </div>
-            <?php endforeach; ?>
         </div>
 
         <!-- Update Modal -->
@@ -73,7 +75,8 @@ $contents = $mysql->Read();
                         </button>
                     </div>
                     <div class="modal-body">
-                        <div id="update-error-alert" class="alert alert-danger" role="alert" style="display: none;"></div>
+                        <div id="update-error-alert" class="alert alert-danger" role="alert"
+                             style="display: none;"></div>
                         <form id="updateForm" action="" method="post">
                             <label>タイトル</label>
                             <input type="text" class="form-control" id="update-title" name="title">
@@ -101,7 +104,8 @@ $contents = $mysql->Read();
                         </button>
                     </div>
                     <div class="modal-body">
-                        <div id="delete-error-alert" class="alert alert-danger" role="alert" style="display: none;"></div>
+                        <div id="delete-error-alert" class="alert alert-danger" role="alert"
+                             style="display: none;"></div>
                         本当に削除しますか？
                     </div>
                     <div class="modal-footer">

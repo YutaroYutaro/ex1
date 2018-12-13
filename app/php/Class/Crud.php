@@ -15,17 +15,14 @@ class Crud extends MySql
         parent::__construct();
     }
 
-    public function Create($title, $comment)
+    public function Create($title, $comment, $createdAt)
     {
         $res = 0;
-        $error = 'create query fail...';
+
+        $this->dbh->beginTransaction();
 
         try {
             $sql = 'INSERT INTO `bbs` (`title`, `comment`, `created_at`) VALUES (?, ?, ?)';
-
-            $now = new DateTime('now');
-
-            $createdAt = $now->format('Y-m-d H:i:s');
 
             $data = [$title, $comment, $createdAt];
 
@@ -33,13 +30,16 @@ class Crud extends MySql
 
             $stmt->execute($data);
 
-            $res = $stmt->rowCount();
+            $res = $this->dbh->lastInsertId('id');
+
+            $this->dbh->commit();
 
         } catch (PDOException $e) {
-            $error = $e->getMessage();
+            error_log($e->getMessage());
+            $this->dbh->rollBack();
         }
 
-        return empty($res) ? $error : $res;
+        return $res;
     }
 
     public function Read()
