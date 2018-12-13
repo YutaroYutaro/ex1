@@ -9,6 +9,6 @@
 class Validation
 {
     public function MaxSize($str, $size) {
-        return (strlen($str) > $size) ? false : true;
+        return (mb_strlen($str, 'UTF-8') > $size) ? false : true;
     }
 }

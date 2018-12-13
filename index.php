@@ -29,6 +29,7 @@ $contents = $mysql->Read();
 
         <!--    入力フォーム    -->
         <div class="col-4">
+            <div id="create-error-alert" class="alert alert-danger" role="alert" style="display: none;"></div>
             <form id="createForm" action="#" method="post">
                 <label>タイトル</label>
                 <input type="text" class="form-control" id="title" name="title" placeholder="タイトル">
@@ -72,6 +73,7 @@ $contents = $mysql->Read();
                         </button>
                     </div>
                     <div class="modal-body">
+                        <div id="update-error-alert" class="alert alert-danger" role="alert" style="display: none;"></div>
                         <form id="updateForm" action="" method="post">
                             <label>タイトル</label>
                             <input type="text" class="form-control" id="update-title" name="title">
@@ -99,6 +101,7 @@ $contents = $mysql->Read();
                         </button>
                     </div>
                     <div class="modal-body">
+                        <div id="delete-error-alert" class="alert alert-danger" role="alert" style="display: none;"></div>
                         本当に削除しますか？
                     </div>
                     <div class="modal-footer">

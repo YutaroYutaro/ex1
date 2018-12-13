@@ -10,25 +10,27 @@ include __DIR__ . '/Validation.php';
 
 class BbsValidation extends Validation
 {
-    public function IdValidation()
-    {
-
-    }
-
-    public function TitleValidation($str)
+    public function IdValidation($id)
     {
         $errors = [];
-
-        if ($this->MaxSize($str, 256)) $errors[] = 'タイトルが長すぎます．';
 
         return $errors;
     }
 
-    public function CommentValidation($str)
+    public function TitleValidation($title)
     {
         $errors = [];
 
-        if ($this->MaxSize($str, 256)) $errors[] = 'コメントが長すぎます．';
+        if (!$this->MaxSize($title, 50)) $errors['title_length'] = 'タイトルは50文字以内で入力してください．';
+
+        return $errors;
+    }
+
+    public function CommentValidation($comment)
+    {
+        $errors = [];
+
+        if (!$this->MaxSize($comment, 100)) $errors['comment_length'] = 'コメントは100文字以内で入力してください．';
 
         return $errors;
     }
