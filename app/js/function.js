@@ -2,6 +2,7 @@ $('#createButton').on('click', function () {
     $('#success-alert').hide().html('');
     $('#update-error-alert').hide().html('');
     $('#create-error-alert').hide().html('');
+    $('#delete-error-alert').hide().html('');
 
     let fd = new FormData($('#createForm').get(0));
 
@@ -43,11 +44,11 @@ $('#createButton').on('click', function () {
                 $('#create-error-alert').html(errorText).show();
             }
 
-            console.log(data);
+            // console.log(data);
         })
         .fail(() => {
             $('#create-error-alert').html('通信に失敗しました．').show();
-            console.log('create fail...');
+            // console.log('create fail...');
         })
 });
 
@@ -57,6 +58,7 @@ $(document).on('click', '.updateButton', function () {
     $('#success-alert').hide().html('');
     $('#update-error-alert').hide().html('');
     $('#create-error-alert').hide().html('');
+    $('#delete-error-alert').hide().html('');
 
     updateId = $(this).parent().attr("id");
     let title = $('#' + updateId + ' .card-title').html();
@@ -118,6 +120,7 @@ $(document).on('click', '.deleteButton', function () {
     $('#success-alert').hide().html('');
     $('#update-error-alert').hide().html('');
     $('#create-error-alert').hide().html('');
+    $('#delete-error-alert').hide().html('');
 
     deleteId = $(this).parent().attr('id');
 });
@@ -130,10 +133,31 @@ $('#modal-delete-button').on('click', function () {
             id: deleteId
         }
     })
-        .done((data) => {
-            console.log('ajax success: ' + data);
-            $('#deleteModal').modal('hide');
-            $('#' + deleteId).parent().remove();
+        .done((res) => {
+            // console.log('ajax success: ' + data);
+            let data = JSON.parse(res);
+
+            if (data['err'].length === 0) {
+                $('#deleteModal').modal('hide');
+                $('#' + deleteId).parent().remove();
+
+                let position = $('#success-alert').html('削除に成功しました．').show().offset().top;
+
+                $('html, body').animate({
+                    scrollTop: position
+                }, {
+                    queue: false
+                });
+            } else {
+                let errorText = '';
+
+                Object.keys(data['err']).forEach(function (key) {
+                    errorText += (data['err'][key] + '<br>');
+                });
+
+                $('#delete-error-alert').html(errorText).show();
+
+            }
 
         })
         .fail(() => {

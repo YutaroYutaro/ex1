@@ -10,15 +10,24 @@ include __DIR__ . '/Class/Crud.php';
 
 header('Content-type: text/plain; charset= UTF-8');
 
+$response = [];
+
 if (isset($_POST['id'])) {
-    $id = $_POST['id'];
+    $errors = [];
 
     $crud = new Crud();
-    $result = $crud->delete($id);
 
-    $res = ($result === 1) ? 'delete success: ' . $result : 'delete fail';
+    $result = $crud->delete($_POST['id']);
 
-    echo json_encode($res);
+    if ($result === 0) $errors[] = '削除に失敗しました．';
+
+    $data = ['id' => $_POST['id']];
+
+    $response = ['err' => $errors, 'data' => $data];
+
 } else {
-    echo "Fail to ajax request";
+    $response = ['err' => ['要素が足りません．'], 'data' => []];
+
 }
+
+echo json_encode($response);

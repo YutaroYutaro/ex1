@@ -40,7 +40,7 @@ if (isset($_POST['id']) && isset($_POST['title']) && isset($_POST['comment'])) {
 
         $data = ['id' => $_POST['id'], 'title' => $_POST['title'], 'comment' => $_POST['comment']];
 
-        if ($result !== 1) $errors[] = '更新に失敗しました．';
+        if ($result === 0) $errors[] = '更新に失敗しました．';
 
         $response = ['err' => $errors, 'data' => $data];
 

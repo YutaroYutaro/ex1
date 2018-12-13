@@ -104,8 +104,7 @@ $contents = $mysql->Read();
                         </button>
                     </div>
                     <div class="modal-body">
-                        <div id="delete-error-alert" class="alert alert-danger" role="alert"
-                             style="display: none;"></div>
+                        <div id="delete-error-alert" class="alert alert-danger" role="alert" style="display: none;"></div>
                         本当に削除しますか？
                     </div>
                     <div class="modal-footer">

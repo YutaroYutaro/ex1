@@ -44,16 +44,26 @@ class Crud extends MySql
 
     public function Read()
     {
-        $sql = 'SELECT * FROM `bbs` ORDER BY `id` DESC';
-
-        $stmt = $this->dbh->prepare($sql);
-
-        $stmt->execute();
-
         $contents = [];
 
-        while ($result = $stmt->fetch(PDO::FETCH_ASSOC)) {
-            $contents[] = ['id' => $result['id'], 'title' => $result['title'], 'comment' => $result['comment'], 'created_at' => $result['created_at']];
+        $this->dbh->beginTransaction();
+
+        try {
+            $sql = 'SELECT * FROM `bbs` ORDER BY `id` DESC';
+
+            $stmt = $this->dbh->prepare($sql);
+
+            $stmt->execute();
+
+            while ($result = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                $contents[] = ['id' => $result['id'], 'title' => $result['title'], 'comment' => $result['comment'], 'created_at' => $result['created_at']];
+            }
+
+            $this->dbh->commit();
+
+        } catch (PDOException $e) {
+            error_log($e->getMessage());
+            $this->dbh->rollBack();
         }
 
         return $contents;
@@ -62,7 +72,8 @@ class Crud extends MySql
     public function Update($id, $title, $comment)
     {
         $res = 0;
-        $error = 'update query fail...';
+
+        $this->dbh->beginTransaction();
 
         try{
             $sql = 'UPDATE `bbs` SET `title`=?, `comment`=? WHERE `id`=?';
@@ -73,19 +84,23 @@ class Crud extends MySql
 
             $stmt->execute($data);
 
-            $res = $stmt->rowCount();
+            $res = $id;
+
+            $this->dbh->commit();
 
         } catch (PDOException $e) {
-            $error = $e->getMessage();
+            error_log($e->getMessage());
+            $this->dbh->rollBack();
         }
 
-        return empty($res) ? $error : $res;
+        return $res;
     }
 
     public function Delete($id)
     {
         $res = 0;
-        $error = 'delete query fail...';
+
+        $this->dbh->beginTransaction();
 
         try {
             $sql = 'DELETE FROM `bbs` WHERE `id` = :id';
@@ -96,12 +111,15 @@ class Crud extends MySql
 
             $stmt->execute();
 
-            $res = $stmt->rowCount();
+            $res = $id;
+
+            $this->dbh->commit();
 
         } catch (PDOException $e) {
-            $error = $e->getMessage();
+            error_log($e->getMessage());
+            $this->dbh->rollBack();
         }
 
-        return empty($res) ? $error : $res;
+        return $res;
     }
 }
