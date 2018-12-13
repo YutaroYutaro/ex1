@@ -56,7 +56,7 @@ class BbsModel extends MySql
             $stmt->execute();
 
             while ($result = $stmt->fetch(PDO::FETCH_ASSOC)) {
-                $contents[] = ['id' => $result['id'], 'title' => $result['title'], 'comment' => $result['comment'], 'created_at' => $result['created_at']];
+                $contents[] = ['id' => $result['id'], 'user_id' => $result['user_id'], 'title' => $result['title'], 'comment' => $result['comment'], 'created_at' => $result['created_at']];
             }
 
             $this->dbh->commit();

@@ -34,11 +34,13 @@ if (isset($_POST['title']) && isset($_POST['comment'])) {
 
         $createdAt = $now->format('Y-m-d H:i:s');
 
-        $id = $crud->create(1, $_POST['title'], $_POST['comment'], $createdAt, $createdAt);
+        session_start();
+
+        $id = $crud->create($_SESSION['user_id'], $_POST['title'], $_POST['comment'], $createdAt, $createdAt);
 
         if ($id === 0) $errors['db_error'] = '新規作成に失敗しました．';
 
-        $data = ['id' => $id,'title' => $_POST['title'], 'comment' => $_POST['comment'], 'created_at' => $createdAt];
+        $data = ['id' => $id, 'user_id' => $_SESSION['user_id'], 'title' => $_POST['title'], 'comment' => $_POST['comment'], 'created_at' => $createdAt];
 
         $response = ['err' => $errors, 'data' => $data];
 

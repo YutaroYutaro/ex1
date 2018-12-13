@@ -19,7 +19,7 @@ $('#createButton').on('click', function () {
             if (data['err'].length === 0) {
                 $('#bbs-body').prepend(
                     '<div class="card mb-3">' +
-                    '<div id="' + data['data']['id'] + '" class="card-body">\n' +
+                    '<div id="' + data['data']['id'] + '" data-user-id="' + data['data']['user_id'] + '" class="card-body">\n' +
                     '<h5 class="card-title">' + data['data']['title'] + '</h5>\n' +
                     '<p class="card-text card-comment">' + data['data']['comment'] + '</p>\n' +
                     '<p class="card-text">\n' +
@@ -34,6 +34,8 @@ $('#createButton').on('click', function () {
                     '</div>' +
                     '</div>'
                 );
+
+                console.log(data['data']);
             } else {
                 let errorText = '';
 

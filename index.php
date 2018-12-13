@@ -45,7 +45,7 @@ $contents = $mysql->Read();
             <div id="bbs-body">
                 <?php foreach ($contents as $content) : ?>
                     <div class="card mb-3">
-                        <div id="<?php echo $content['id']; ?>" class="card-body">
+                        <div id="<?php echo $content['id']; ?>" data-user-id="<?php echo $content['user_id'] ?>" class="card-body">
                             <h5 class="card-title"><?php echo $content['title']; ?></h5>
                             <p class="card-text card-comment"><?php echo $content['comment']; ?></p>
                             <p class="card-text">
@@ -125,6 +125,6 @@ $contents = $mysql->Read();
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
         integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
         crossorigin="anonymous"></script>
-<script src="./app/js/function.js"></script>
+<script src="app/js/bbsFunction.js"></script>
 </body>
 </html>
