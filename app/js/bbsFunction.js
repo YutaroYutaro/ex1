@@ -19,11 +19,11 @@ $('#createButton').on('click', function () {
             if (data['err'].length === 0) {
                 $('#bbs-body').prepend(
                     '<div class="card mb-3">' +
-                    '<div id="' + data['data']['id'] + '" data-user-id="' + data['data']['user_id'] + '" class="card-body">\n' +
-                    '<h5 class="card-title">' + data['data']['title'] + '</h5>\n' +
-                    '<p class="card-text card-comment">' + data['data']['comment'] + '</p>\n' +
+                    '<div id="' + escape_html(data['data']['id']) + '" data-user-id="' + escape_html(data['data']['user_id']) + '" class="card-body">\n' +
+                    '<h5 class="card-title">' + escape_html(data['data']['title']) + '</h5>\n' +
+                    '<p class="card-text card-comment">' + escape_html(data['data']['comment']) + '</p>\n' +
                     '<p class="card-text">\n' +
-                    '<small class="text-muted">' + data['data']['created_at'] + '</small>\n' +
+                    '<small class="text-muted">' + escape_html(data['data']['created_at']) + '</small>\n' +
                     '</p>\n' +
                     '<button type="button" class="btn btn-success updateButton" data-toggle="modal"\n' +
                     'data-target="#updateModal">修正する\n' +
@@ -167,3 +167,19 @@ $('#modal-delete-button').on('click', function () {
             // console.log('delete fail...');
         });
 });
+
+function escape_html (string) {
+    if(typeof string !== 'string') {
+        return string;
+    }
+    return string.replace(/[&'`"<>]/g, function(match) {
+        return {
+            '&': '&amp;',
+            "'": '&#x27;',
+            '`': '&#x60;',
+            '"': '&quot;',
+            '<': '&lt;',
+            '>': '&gt;',
+        }[match]
+    });
+}

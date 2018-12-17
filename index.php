@@ -69,12 +69,12 @@ $contents = $mysql->Read();
             <div id="bbs-body">
                 <?php foreach ($contents as $content) : ?>
                     <div class="card mb-3">
-                        <div id="<?php echo $content['id']; ?>" data-user-id="<?php echo $content['user_id'] ?>"
+                        <div id="<?php echo htmlspecialchars($content['id'], ENT_QUOTES); ?>" data-user-id="<?php echo htmlspecialchars($content['user_id'], ENT_QUOTES); ?>"
                              class="card-body">
                             <h5 class="card-title"><?php echo $content['title']; ?></h5>
-                            <p class="card-text card-comment"><?php echo $content['comment']; ?></p>
+                            <p class="card-text card-comment"><?php echo htmlspecialchars($content['comment'], ENT_QUOTES); ?></p>
                             <p class="card-text">
-                                <small class="text-muted"><?php echo $content['created_at']; ?></small>
+                                <small class="text-muted"><?php echo htmlspecialchars($content['created_at'], ENT_QUOTES); ?></small>
                             </p>
                             <?php if ($content['user_id'] === $_SESSION['user_id']) : ?>
                                 <button type="button" class="btn btn-success updateButton" data-toggle="modal"
