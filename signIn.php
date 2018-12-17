@@ -26,18 +26,19 @@
         <h2>ログイン</h2>
     </div>
     <div class="card-body">
-        <form>
+        <div id="SignInErrorAlert" class="alert alert-danger" role="alert" style="display: none;"></div>
+        <form id="SignInForm">
             <div class="form-group">
                 <label for="InputEmail">メールアドレス</label>
                 <input type="email" class="form-control" id="InputEmail" aria-describedby="emailHelp"
-                       placeholder="メールアドレス">
+                       name="email" placeholder="メールアドレス">
             </div>
             <div class="form-group">
                 <label for="InputPassword">パスワード</label>
-                <input type="password" class="form-control" id="InputPassword" placeholder="パスワード">
+                <input type="password" class="form-control" id="InputPassword" name="password" placeholder="パスワード">
             </div>
 
-            <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+            <button id="SignIn" class="btn btn-lg btn-primary btn-block" type="button">Sign in</button>
             <button class="btn btn-lg btn-secondary btn-block" type="button" onclick="location.href='signUp.php'">Sign up</button>
         </form>
 
@@ -50,5 +51,6 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
         integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
         crossorigin="anonymous"></script>
+<script src="app/js/signInFunction.js"></script>
 </body>
 </html>
