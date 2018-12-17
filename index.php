@@ -12,6 +12,7 @@ if (!isset($_SESSION['user_id'])) header("Location: ./signIn.php");
 
 $mysql = new BbsModel();
 $contents = $mysql->Read();
+$name = $mysql->getName($_SESSION['user_id']);
 ?>
 <!doctype html>
 <html lang="en">
@@ -45,6 +46,9 @@ $contents = $mysql->Read();
                 </li>
             </ul>
         </div>
+        <div class="mr-5">
+            <h3><?php echo htmlspecialchars($name['user_name'], ENT_QUOTES); ?></h3>
+        </div>
         <div class="my-2 my-lg-0">
             <a id="Logout" href="./app/php/signOut.php">ログアウト</a>
         </div>
@@ -69,7 +73,8 @@ $contents = $mysql->Read();
             <div id="bbs-body">
                 <?php foreach ($contents as $content) : ?>
                     <div class="card mb-3">
-                        <div id="<?php echo htmlspecialchars($content['id'], ENT_QUOTES); ?>" data-user-id="<?php echo htmlspecialchars($content['user_id'], ENT_QUOTES); ?>"
+                        <div id="<?php echo htmlspecialchars($content['id'], ENT_QUOTES); ?>"
+                             data-user-id="<?php echo htmlspecialchars($content['user_id'], ENT_QUOTES); ?>"
                              class="card-body">
                             <h5 class="card-title"><?php echo $content['title']; ?></h5>
                             <p class="card-text card-comment"><?php echo htmlspecialchars($content['comment'], ENT_QUOTES); ?></p>
