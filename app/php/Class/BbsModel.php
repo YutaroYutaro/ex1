@@ -91,7 +91,7 @@ class BbsModel extends MySql
 
         $this->dbh->beginTransaction();
 
-        try{
+        try {
             $sql = 'UPDATE `bbs` SET `title`=?, `comment`=?, `updated_at`=? WHERE `id`=? AND `is_deleted`=false';
 
             $data = [$title, $comment, $updatedAt, $id];
@@ -137,5 +137,40 @@ class BbsModel extends MySql
         }
 
         return $res;
+    }
+
+    public function getName($id)
+    {
+        $contents = [];
+
+        $this->dbh->beginTransaction();
+
+        try {
+            $sql = 'SELECT '
+                .     '`name` AS user_name '
+                . 'FROM '
+                .     '`user` '
+                . 'WHERE '
+                .     '`id`=? '
+                . 'AND '
+                .     '`is_deleted`=false';
+
+            $stmt = $this->dbh->prepare($sql);
+
+            $data = [$id];
+
+            $stmt->execute($data);
+
+            $result = $stmt->fetch(PDO::FETCH_ASSOC);
+
+            $contents = ['user_name' => $result['user_name']];
+
+
+        } catch (PDOException $e) {
+            error_log($e->getMessage());
+            $this->dbh->rollBack();
+        }
+
+        return $contents;
     }
 }
