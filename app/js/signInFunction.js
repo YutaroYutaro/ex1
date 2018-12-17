@@ -1,11 +1,10 @@
-$('#SignUp').on('click', function () {
-    $('#SignUpErrorAlert').hide().html('');
-
-    let fd = new FormData($('#SignUpForm').get(0));
+$('#SignIn').on('click', function () {
+    $('#SignInErrorAlert').hide().html('');
+    let fd = new FormData($('#SignInForm').get(0));
 
     $.ajax({
         type: 'POST',
-        url: './app/php/signUp.php',
+        url: './app/php/signIn.php',
         data: fd,
         processData: false,
         contentType: false
@@ -15,7 +14,6 @@ $('#SignUp').on('click', function () {
 
             if (data['err'].length === 0) {
                 location.href = './index.php';
-                console.log(data);
             } else {
                 let errorText = '';
 
@@ -23,13 +21,13 @@ $('#SignUp').on('click', function () {
                     errorText += (data['err'][key] + '<br>');
                 });
 
-                $('#SignUpErrorAlert').html(errorText).show();
+                $('#SignInErrorAlert').html(errorText).show();
             }
 
             console.log(data);
+
         })
-        .fail(() => {
-            // console.log('ajax fail...')
-            $('#SignUpErrorAlert').html('通信に失敗しました．').show();
-        });
+        .fail((res) => {
+            $('#SignInErrorAlert').html('通信に失敗しました．').show();
+        })
 });

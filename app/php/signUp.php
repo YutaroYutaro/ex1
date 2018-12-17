@@ -38,14 +38,14 @@ if (isset($_POST['email']) && isset($_POST['password']) && isset($_POST['name'])
 
         $id = $signUp->insertUserData($_POST['email'], password_hash($_POST['password'], PASSWORD_BCRYPT), $_POST['name'], $createdAt, $createdAt);
 
-        if ($id === 0) {
-            $errors['db_error'] = '新規作成に失敗しました．';
+        if ($id === '0') {
+            $errors['db_error'] = '既に登録されているメールアドレスです．';
         } else {
             session_start();
             $_SESSION['user_id'] = $id;
         }
 
-        $data = ['id' => $_SESSION['user_id'],'email' => $_POST['email'], 'password' => $_POST['password'], 'created_at' => $createdAt, 'updated_at' => $createdAt];
+        $data = ['id' => $id,'email' => $_POST['email'], 'password' => $_POST['password'], 'created_at' => $createdAt, 'updated_at' => $createdAt];
 
         $response = ['err' => $errors, 'data' => $data];
 
