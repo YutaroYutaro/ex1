@@ -165,6 +165,8 @@ class BbsModel extends MySql
 
             $contents = ['user_name' => $result['user_name']];
 
+            $this->dbh->commit();
+
 
         } catch (PDOException $e) {
             error_log($e->getMessage());
