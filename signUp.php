@@ -27,6 +27,7 @@
         <h2>新規登録</h2>
     </div>
     <div class="card-body">
+        <div id="SignUpErrorAlert" class="alert alert-danger" role="alert" style="display: none;"></div>
         <form id="SignUpForm">
             <div class="form-group">
                 <label for="InputEmail">メールアドレス</label>
