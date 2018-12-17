@@ -74,7 +74,7 @@ $contents = $mysql->Read();
                             <h5 class="card-title"><?php echo $content['title']; ?></h5>
                             <p class="card-text card-comment"><?php echo htmlspecialchars($content['comment'], ENT_QUOTES); ?></p>
                             <p class="card-text">
-                                <small class="text-muted"><?php echo htmlspecialchars($content['created_at'], ENT_QUOTES); ?></small>
+                                <small class="text-muted"><?php echo htmlspecialchars($content['created_at'], ENT_QUOTES) . ' by ' . htmlspecialchars($content['user_name'], ENT_QUOTES); ?></small>
                             </p>
                             <?php if ($content['user_id'] === $_SESSION['user_id']) : ?>
                                 <button type="button" class="btn btn-success updateButton" data-toggle="modal"

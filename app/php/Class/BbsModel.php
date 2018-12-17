@@ -49,14 +49,30 @@ class BbsModel extends MySql
         $this->dbh->beginTransaction();
 
         try {
-            $sql = 'SELECT * FROM `bbs` WHERE `is_deleted`=false ORDER BY `id` DESC';
+            $sql = 'SELECT '
+                .     '`bbs`.`id`, '
+                .     '`bbs`.`user_id`, '
+                .     '`bbs`.`title`, '
+                .     '`bbs`.`comment`, '
+                .     '`bbs`.`created_at`, '
+                .     '`user`.`name` AS user_name '
+                . 'FROM '
+                .     '`bbs` '
+                . 'LEFT JOIN '
+                .     '`user` '
+                . 'ON '
+                .     '`bbs`.`user_id`=`user`.`id` '
+                . 'WHERE '
+                .     '`bbs`.`is_deleted`=false '
+                . 'ORDER BY '
+                .     '`bbs`.`id` DESC ';
 
             $stmt = $this->dbh->prepare($sql);
 
             $stmt->execute();
 
             while ($result = $stmt->fetch(PDO::FETCH_ASSOC)) {
-                $contents[] = ['id' => $result['id'], 'user_id' => $result['user_id'], 'title' => $result['title'], 'comment' => $result['comment'], 'created_at' => $result['created_at']];
+                $contents[] = ['id' => $result['id'], 'user_id' => $result['user_id'], 'user_name' => $result['user_name'], 'title' => $result['title'], 'comment' => $result['comment'], 'created_at' => $result['created_at']];
             }
 
             $this->dbh->commit();
